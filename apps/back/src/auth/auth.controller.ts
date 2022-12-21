@@ -11,4 +11,9 @@ export class AuthController {
     async signup(@Body() { loginId, password, name }: any) {
         await this.authService.createUser(loginId, password, name);
     }
+
+    @Post("email/verfiy")
+    async verifyEmail(@Body() { email }) {
+        await this.authService.sendVerifyEmail(email);
+    }
 }

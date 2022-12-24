@@ -5,9 +5,10 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PaymentModule } from './payment/payment.module';
 import { CoinModule } from './coin/coin.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [UserModule, AuthModule, PaymentModule, CoinModule],
+  imports: [UserModule, AuthModule, PaymentModule, CoinModule, DatabaseModule],
   controllers: [AppController],
   providers: [AppService],
 })

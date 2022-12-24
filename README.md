@@ -4,17 +4,22 @@ This is an official Yarn v1 starter turborepo.
 
 ## What's inside?
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/) as a package manager. It includes the following packages/apps:
+이 Turborepo로 구성된 레포지토리는 [Yarn](https://classic.yarnpkg.com/)을 패키지 매니저로 사용합니다.
+
+아래에 설명되어 있는 `apps` 또는 `packages` 폴더 내의 레포지토리를 가지고 있습니다.
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+`apps`
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- `front`: [Next.js](https://nextjs.org/) 앱, Front-End Repository
+- `test`: 다른 [Next.js](https://nextjs.org/) 앱, 모노레포 테스트 용으로 남겨 놓음
+
+`packages`
+
+- `ui`: `front`와 `test`에서 사용할 수 있는 리액트 컴포넌트 라이브러리
+- `eslint-config-custom`: `eslint` 설정 (`eslint-config-next`, `eslint-config-prettier` 포함)
+- `tsconfig`: 모노레포에서 사용되는 `tsconfig.json` 설정
 
 ### Utilities
 
@@ -26,21 +31,31 @@ This turborepo has some additional tools already setup for you:
 
 ### Build
 
-To build all apps and packages, run the following command:
+build 커맨드는 루트에서 다음과 같이 입력:
 
 ```
-cd my-turborepo
 yarn run build
 ```
 
 ### Develop
 
-To develop all apps and packages, run the following command:
+dev 커맨드는 루트에서 다음과 같이 입력:
 
 ```
-cd my-turborepo
 yarn run dev
 ```
+
+> 루트에서 커맨드를 입력하면, apps 내의 dev/build scripts를 가진 폴더 모두 실행되는 방식. (run 생략 가능)
+
+하나의 앱만 실행하려는 경우
+
+```
+yarn dev --scope="package-name"
+
+$ yarn dev --scope=test
+```
+
+--scope
 
 ### Remote Caching
 

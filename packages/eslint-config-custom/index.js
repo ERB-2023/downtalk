@@ -8,16 +8,10 @@ module.exports = {
     "prettier",
     "plugin:react/jsx-runtime",
   ],
-  rules: {
-    "react/function-component-definition": [
-      2,
-      { namedComponents: "arrow-function" },
-    ],
-  },
   plugins: ["@typescript-eslint", "import"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: ["tsconfig.json"],
+    project: "./tsconfig.json",
     tsconfigRootDir: __dirname,
     sourceType: "module",
   },

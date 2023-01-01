@@ -1,5 +1,6 @@
 {
   "eslint.workingDirectories": [{ "mode": "auto" }],
+  "typescript.suggestionActions.enabled": false,
   // Formatting using Prettier by default for all languages
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Formatting using Prettier for JavaScript, overrides VSCode default.

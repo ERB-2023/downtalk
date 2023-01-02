@@ -24,4 +24,12 @@ export class User {
 
   @OneToMany(type => Payment, (payment) => payment.user)
   payments: Payment[];
+
+  static create(loginId: string, name: string, password:string) {
+    const user = new User();
+    user.loginId = loginId;
+    user.name = name;
+    user.password = password;
+    return user;
+  }
 }

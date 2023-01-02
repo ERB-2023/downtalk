@@ -9,8 +9,26 @@ import { DatabaseModule } from './database/database.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'
 
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 @Module({
-  imports: [UserModule, AuthModule, PaymentModule, CoinModule, DatabaseModule,
+  imports: [
+    UserModule, 
+    AuthModule, 
+    PaymentModule, 
+    CoinModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      // password: 'root',
+      database: 'test',
+      entities: [
+          __dirname + '/**/*.entity{.ts,.js}',
+      ],
+      synchronize: true,
+    }),
     MailerModule.forRoot({
       transport: 'smtps://user@domain.com:pass@smtp.domain.com',
       defaults: {
@@ -23,7 +41,8 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter'
           strict: true,
         },
       },
-    }),],
+    })
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

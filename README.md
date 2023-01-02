@@ -53,9 +53,21 @@ yarn run dev
 yarn dev --scope="package-name"
 
 $ yarn dev --scope=test
+$ yarn dev --scope=front
 ```
 
---scope
+--scope에는 `front` or `back` 같은 apps/packages 내 폴더 명
+
+root에서 패키지 설치하기
+
+```
+$ yarn workspace [workspace-name] add [package-name]
+
+$ yarn workspace front add redux-toolkit
+```
+
+workspace-name에는 `front` or `back` 같은 apps/packages 내 폴더 명
+package-name에는 설치하려는 패키지 명
 
 ### Remote Caching
 

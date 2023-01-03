@@ -7,6 +7,7 @@ import { PaymentModule } from './payment/payment.module';
 import { CoinModule } from './coin/coin.module';
 import { DatabaseModule } from './database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -25,7 +26,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           __dirname + '/**/*.entity{.ts,.js}',
       ],
       synchronize: true,
-    })
+    }),
+    JwtModule.registerAsync({
+      // imports: [ConfigModule],
+      // inject: [ConfigService],
+      useFactory: async (
+        // configService: ConfigService
+      ) => ({
+        secret: "downbit",
+        signOptions: {
+          expiresIn: 0,
+        },
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

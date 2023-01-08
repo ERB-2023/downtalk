@@ -8,8 +8,10 @@ export class AuthController {
         private readonly authService: AuthService,
     ){}
 
+    
     @Post("signup")
     async signup(@Body() { loginId, password, name }: any) {
+        console.log("test webhook")
         const user = await this.authService.createUser(loginId, password, name);
         return user;
     }

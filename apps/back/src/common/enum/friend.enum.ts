@@ -1,0 +1,4 @@
+export enum FRIEND_STATUS {
+  FRIEND = 'FRIEND',
+  BLOCKED = 'BLOCKED',
+}

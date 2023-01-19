@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ChatModule } from './chat/chat.module';
-import { AllExceptionsFilter } from './common/filter/exception.filter';
+import { HttpExceptionsFilter } from './common/filter/exception.filter';
 
 @Module({
   imports: [ChatModule, AuthModule],
@@ -12,7 +13,7 @@ import { AllExceptionsFilter } from './common/filter/exception.filter';
     AppService,
     {
       provide: APP_FILTER,
-      useClass: AllExceptionsFilter,
+      useClass: HttpExceptionsFilter,
     },
   ],
 })

@@ -1,38 +1,30 @@
 import {
-    ExceptionFilter,
-    Catch,
-    ArgumentsHost,
-    Logger,
-  } from '@nestjs/common';
-  import { EventTrackerService } from '../event-tracker/event-tracker.service';
-  
-  @Catch()
-  export class AllExceptionsFilter implements ExceptionFilter {
-    constructor(private readonly eventTrackerService: EventTrackerService) {}
-    catch(exception: any, host: ArgumentsHost) {
-      const ctx = host.switchToHttp();
-      const response = ctx.getResponse();
-      const request = ctx.getRequest();
-  
-      const statusCode = exception.getStatus()
-  
-      const message =
-        typeof exception.message === 'string'
-          ? exception.message
-          : exception.message.message;
-  
-      const errorResponse = {
-        statusCode: statusCode,
-        data: null,
-        message: message,
-      };
+  ExceptionFilter,
+  Catch,
+  ArgumentsHost,
+  Logger,
+  HttpException,
+} from '@nestjs/common';
 
-      Logger.error(
-        `[${request.method}] ${request.url} - statusCode: ${statusCode}`,
-        JSON.stringify(errorResponse),
-      );
+@Catch(HttpException)
+export class HttpExceptionsFilter implements ExceptionFilter {
+  catch(exception: HttpException, host: ArgumentsHost) {
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse();
+    const request = ctx.getRequest();
+    const statusCode = exception.getStatus();
 
-      response.status(statusCode).json(errorResponse);
-    }
+    const errorResponse = {
+      statusCode: statusCode,
+      data: '',
+      message: exception.message,
+    };
+
+    Logger.error(
+      `[${request.method}] ${request.url} - statusCode: ${statusCode}`,
+      JSON.stringify(errorResponse),
+    );
+
+    response.status(statusCode).json(errorResponse);
   }
-  
+}

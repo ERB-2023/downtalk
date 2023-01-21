@@ -15,4 +15,10 @@ describe('FriendService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('findFreidns', () => {
+    it('호출 시, Promise<Friend[]> 타입 return', () => {
+      expect(service).toBeDefined();
+    });
+  });
 });

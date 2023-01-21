@@ -1,9 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
+import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
-    constructor(){}
+  constructor(private readonly userService: UserService) {}
 
-    @Get()
-    async searchUser() {}
+  @Get()
+  async searchUser(
+    @Query('searchKey') searchKey: string,
+    @Query('limit', ParseIntPipe) limit: number,
+    @Query('offset', ParseIntPipe) offset: number,
+  ) {
+    return this.userService.searchUser(searchKey, limit, offset);
+  }
 }

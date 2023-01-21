@@ -4,11 +4,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ChatModule } from './chat/chat.module';
+import { UserModule } from './user/user.module';
+import { FriendModule } from './friend/friend.module';
 import { HttpExceptionsFilter } from './common/filter/exception.filter';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [ChatModule, AuthModule, DatabaseModule],
+  imports: [ChatModule, AuthModule, UserModule, FriendModule, DatabaseModule],
   controllers: [AppController],
   providers: [
     AppService,

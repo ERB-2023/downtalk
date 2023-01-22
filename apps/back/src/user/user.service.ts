@@ -9,7 +9,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async searchUser(
+  async searchUsers(
     searchKey: string,
     limit: number,
     offset: number,

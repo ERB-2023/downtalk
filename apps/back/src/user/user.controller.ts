@@ -6,11 +6,11 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async searchUser(
+  async searchUsers(
     @Query('searchKey') searchKey: string,
     @Query('limit', ParseIntPipe) limit: number,
     @Query('offset', ParseIntPipe) offset: number,
   ) {
-    return this.userService.searchUser(searchKey, limit, offset);
+    return this.userService.searchUsers(searchKey, limit, offset);
   }
 }

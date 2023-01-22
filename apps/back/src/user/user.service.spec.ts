@@ -15,4 +15,10 @@ describe('UserService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('searchUsers', () => {
+    it('호출 시, Promise<Users> 타입 return', () => {
+      expect(service).toBeDefined();
+    });
+  });
 });

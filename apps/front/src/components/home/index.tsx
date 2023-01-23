@@ -1,14 +1,13 @@
 import Lottie from 'react-lottie';
 import Image from 'next/image';
 import animationData from 'lottie/main-chatting.json';
-import GoogleLogo from '';
 import styles from './index.module.scss';
 
-const Home = () => {
+function Home() {
   const mainChattingOptions = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
+    animationData,
     rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
   };
   return (
@@ -20,12 +19,12 @@ const Home = () => {
           <Lottie options={mainChattingOptions} height={254} width={254} />
         </div>
       </div>
-      <button className={styles.google}>
+      <button type="button" className={styles.google}>
         <Image className={styles.logo} src="/images/google-logo.svg" alt="google logo" width="34" height="34" />
         <p>구글로 시작하기</p>
       </button>
     </div>
   );
-};
+}
 
 export default Home;

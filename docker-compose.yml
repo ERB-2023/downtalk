@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 
 services:
   # web:
@@ -11,24 +11,62 @@ services:
   #     - 3000:3000
   #   networks:
   #     - app_network
+
   api:
+    depends_on:
+      - db
     container_name: api
     build:
       context: .
       dockerfile: ./apps/back/api.Dockerfile
     restart: always
+    environment:
+      DB_HOST: db
     ports:
       - 4000:4000
     networks:
       - app_network
+
   chat:
+    depends_on:
+      - db
     container_name: chat
     build:
       context: .
       dockerfile: ./apps/back/chat.Dockerfile
     restart: always
+    environment:
+      DB_HOST: db
     ports:
       - 4001:4001
+    networks:
+      - app_network
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: downchat 
+    networks:
+      - app_network
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: db
     networks:
       - app_network
 
@@ -37,3 +75,6 @@ services:
 networks:
   app_network:
     external: true
+
+volumes:
+  db_data:

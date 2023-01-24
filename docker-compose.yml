@@ -20,6 +20,8 @@ services:
       context: .
       dockerfile: ./apps/back/api.Dockerfile
     restart: always
+    environment:
+      DB_HOST: db
     ports:
       - 4000:4000
     networks:
@@ -33,6 +35,8 @@ services:
       context: .
       dockerfile: ./apps/back/chat.Dockerfile
     restart: always
+    environment:
+      DB_HOST: db
     ports:
       - 4001:4001
     networks:

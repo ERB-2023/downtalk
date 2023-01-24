@@ -10,9 +10,19 @@ import { UserModule } from './user/user.module';
 import { FriendModule } from './friend/friend.module';
 import { HttpExceptionsFilter } from './common/filter/exception.filter';
 import { DatabaseModule } from './database/database.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [ChatModule, AuthModule, UserModule, FriendModule, DatabaseModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    ChatModule,
+    AuthModule,
+    UserModule,
+    FriendModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

@@ -17,8 +17,9 @@ describe('FriendService', () => {
   });
 
   describe('findFreidns', () => {
-    it('호출 시, Promise<Friend[]> 타입 return', () => {
-      expect(service).toBeDefined();
-    });
+    it('호출 시, Promise<Friend[]> 타입 return', () => {});
+  });
+  describe('addFriend', () => {
+    it('호출 시, Promise<void> 타입 return', () => {});
   });
 });

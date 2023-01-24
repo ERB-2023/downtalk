@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   DefaultValuePipe,
   Get,
@@ -14,9 +15,6 @@ import { FriendService } from './friend.service';
 export class FriendController {
   constructor(private readonly friendService: FriendService) {}
 
-  @Post()
-  async requestFriend() {}
-
   @Get()
   async getFriends(
     @Request() req: { user: { id: number } },
@@ -24,5 +22,13 @@ export class FriendController {
     @Query('offset', new DefaultValuePipe(10), ParseIntPipe) offset: number,
   ): Promise<Friend[]> {
     return this.friendService.findFriends(req.user.id, limit, offset);
+  }
+
+  @Post()
+  async requestFriend(
+    @Request() req: { user: { id: number } },
+    @Body('userId') addressedUserId: number,
+  ): Promise<void> {
+    return this.friendService.addFriend(req.user.id, addressedUserId);
   }
 }

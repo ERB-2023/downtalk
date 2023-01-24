@@ -15,6 +15,21 @@ export class FriendService {
     private readonly friendRepository: Repository<Friend>,
   ) {}
 
+  async findFriends(
+    userId: number,
+    limit: number,
+    offset: number,
+  ): Promise<Friend[]> {
+    return this.friendRepository.find({
+      where: {
+        requestUser: { id: userId },
+        status: FRIEND_STATUS.FRIEND,
+      },
+      take: limit,
+      skip: offset,
+    });
+  }
+
   async addFriend(
     requestUserId: number,
     addressedUserId: number,

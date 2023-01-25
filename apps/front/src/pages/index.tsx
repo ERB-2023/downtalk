@@ -1,11 +1,6 @@
-import { Button } from "ui";
-import styles from "styles/Home.module.scss";
+import React from "react";
+import Home from "components/home";
 
 export default function Web() {
-  return (
-    <div>
-      <h1 className={styles.test}>Web</h1>
-      <Button />
-    </div>
-  );
+  return <Home />;
 }

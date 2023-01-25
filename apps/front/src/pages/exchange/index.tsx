@@ -1,5 +1,3 @@
-const Exchange = () => {
+export default function Exchange() {
   return <p>exchange</p>;
-};
-
-export default Exchange;
+}

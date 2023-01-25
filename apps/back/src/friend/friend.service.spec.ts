@@ -1,4 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { DatabaseModule } from 'src/database/database.module';
+import { friendProviders } from 'src/database/providers/friend.provider';
+import { userProviders } from 'src/database/providers/user.provider';
 import { FriendService } from './friend.service';
 
 describe('FriendService', () => {
@@ -6,7 +9,8 @@ describe('FriendService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FriendService],
+      imports: [DatabaseModule],
+      providers: [FriendService, ...friendProviders, ...userProviders],
     }).compile();
 
     service = module.get<FriendService>(FriendService);

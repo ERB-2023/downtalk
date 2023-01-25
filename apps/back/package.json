@@ -26,6 +26,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-socket.io": "^9.2.1",
+    "@nestjs/testing": "^9.2.1",
     "@nestjs/websockets": "^9.2.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.0.1",
@@ -70,6 +71,9 @@
     ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/../src/$1"
+    },
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },

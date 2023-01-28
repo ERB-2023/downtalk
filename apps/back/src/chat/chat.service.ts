@@ -38,7 +38,7 @@ export class ChatService {
       where: { id: In(userIds) },
     });
 
-    const chatRoom = await this.chatRoomRepository.create({
+    const chatRoom = this.chatRoomRepository.create({
       name: roomInfo.name,
       users: users,
     });

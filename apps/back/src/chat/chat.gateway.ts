@@ -10,7 +10,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket, Namespace } from 'socket.io';
 
-@WebSocketGateway(4001, { namespace: 'chat' })
+@WebSocketGateway({ namespace: 'chat' })
 export class ChatGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {

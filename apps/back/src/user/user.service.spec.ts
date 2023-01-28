@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseModule } from 'src/database/database.module';
-import { userProviders } from 'src/database/providers/user.provider';
+import { DatabaseModule } from '../database/database.module';
+import { userProviders } from '../database/providers/user.provider';
 import { UserService } from './user.service';
 
 describe('UserService', () => {

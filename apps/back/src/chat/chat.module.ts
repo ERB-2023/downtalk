@@ -5,10 +5,17 @@ import { ChatController } from './chat.controller';
 import { DatabaseModule } from 'src/database/database.module';
 import { userProviders } from 'src/database/providers/user.provider';
 import { chatRoomProvider } from 'src/database/providers/chat-room.provider';
+import { userChatRoomProvider } from 'src/database/providers/user-chat-room.provider';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [ChatService, ChatGateway, ...userProviders, chatRoomProvider],
+  providers: [
+    ChatService,
+    ChatGateway,
+    ...userProviders,
+    chatRoomProvider,
+    userChatRoomProvider,
+  ],
   controllers: [ChatController],
 })
 export class ChatModule {}

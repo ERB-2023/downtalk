@@ -21,7 +21,7 @@ export class ChatController {
     @Query('limit', ParseIntPipe) limit: number,
     @Query('offset', ParseIntPipe) offset: number,
   ) {
-    return this.chatService.findRooms(req.user.id, limit, offset);
+    return this.chatService.findRooms(1, limit, offset);
   }
 
   @Post()

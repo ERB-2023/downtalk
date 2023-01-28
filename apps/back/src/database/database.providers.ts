@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
 
 export const databaseProviders = [
   {
@@ -16,6 +17,12 @@ export const databaseProviders = [
       });
 
       return dataSource.initialize();
+    },
+  },
+  {
+    provide: 'MONGO_DB_PROVIDER',
+    useFactory: async () => {
+      const mongoDB = MongooseModule.forRoot('mongodb://localhost:27017');
     },
   },
 ];

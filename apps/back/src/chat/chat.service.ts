@@ -25,16 +25,16 @@ export class ChatService {
     userId: number,
     limit: number,
     offset: number,
-  ): Promise<ChatRoom[]> {
-    return this.chatRoomRepository.find({
-      where: {
-        chats: {
-          user: { id: userId },
-        },
-      },
-      take: limit,
-      skip: offset,
-    });
+  ): Promise<UserChatRoom[]> {
+    return this.userChatRoomRepository
+      .createQueryBuilder('userChatRoom')
+      .innerJoin('userChatRoom.chatRoom', 'chatRoom')
+      .select(['chatRoom.id as id', 'chatRoom.name as name'])
+      .where('userChatRoom.userId = :userId', { userId })
+      .take(limit)
+      .skip(offset)
+      .orderBy('chatRoom.createdAt', 'DESC')
+      .getRawMany();
   }
 
   async createRoom(

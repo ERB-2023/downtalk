@@ -5,10 +5,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   DeleteDateColumn,
-  ManyToMany,
-  JoinTable,
+  OneToMany,
 } from 'typeorm';
-import { User } from './user.entity';
+import { UserChatRoom } from './user-chat-room.entity';
 
 @Entity()
 export class ChatRoom {
@@ -24,7 +23,6 @@ export class ChatRoom {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToMany(() => User)
-  @JoinTable({ name: 'user_chat_rooms' })
-  users: User[];
+  @OneToMany(() => UserChatRoom, (chat) => chat.user)
+  chats: UserChatRoom[];
 }

@@ -7,8 +7,15 @@ import {
   OnGatewayInit,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  WsResponse,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket, Namespace } from 'socket.io';
+
+type Message = {
+  roomId: string;
+  message: string;
+};
 
 @WebSocketGateway({ namespace: 'chat' })
 export class ChatGateway
@@ -20,18 +27,32 @@ export class ChatGateway
 
   @WebSocketServer() namespace: Namespace;
 
+  @SubscribeMessage('enterChatRoom')
+  enterChatRoom(
+    @ConnectedSocket() socket: Socket,
+    @MessageBody('roomId') roomId: string,
+  ) {
+    this.logger.log('enterChatRoom', roomId);
+    this.logger.log('client', socket);
+    this.namespace.socketsJoin(roomId);
+  }
+
   @SubscribeMessage('message')
-  handleEvent(@MessageBody() data: string): string {
-    return data;
+  handleEvent(
+    @ConnectedSocket() socket: Socket,
+    @MessageBody('roomId') roomId: string,
+    @MessageBody('message') message: string,
+  ): Message {
+    this.namespace.to(roomId).emit('message', message);
+    this.logger.log('message', { roomId, message });
+    return;
   }
 
   handleDisconnect(client: Socket) {
-    // throw new Error('Method not implemented.');
-    console.log(client);
+    this.logger.log('disconnected ', client);
   }
   handleConnection(client: Socket, ...args: any[]) {
-    // throw new Error('Method not implemented.');
-    console.log(client);
+    this.logger.log('connected ', client);
   }
   afterInit(server: any) {
     // throw new Error('Method not implemented.');

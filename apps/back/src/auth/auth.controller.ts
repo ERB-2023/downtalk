@@ -1,13 +1,12 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, Post } from '@nestjs/common';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  @Get()
-  @UseGuards(AuthGuard('google'))
-  async googleAuth() {}
+  constructor(private readonly authService: AuthService) {}
 
-  @Get('google/redirect')
-  @UseGuards(AuthGuard('google'))
-  googleAuthRedirect(@Req() req) {}
+  @Post()
+  login(@Body() tokenData: any) {
+    return this.authService.login(tokenData);
+  }
 }

@@ -15,11 +15,8 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   email: string;
-
-  @Column()
-  password: string;
 
   @ManyToMany(() => ChatRoom)
   @JoinTable({ name: 'user_chat_rooms' })

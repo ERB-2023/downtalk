@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { FRIEND_STATUS } from 'src/common/enum/friend.enum';
-import { FriendAlreadyAddedException } from 'src/common/exception/friend.exception';
-import { UserNotFoundException } from 'src/common/exception/user.exception';
-import { Friend } from 'src/database/entity/friend.entity';
-import { User } from 'src/database/entity/user.entity';
+import { FRIEND_STATUS } from '../common/enum/friend.enum';
+import { FriendAlreadyAddedException } from '../common/exception/friend.exception';
+import { UserNotFoundException } from '../common/exception/user.exception';
+import { Friend } from '../database/entity/friend.entity';
+import { User } from '../database/entity/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

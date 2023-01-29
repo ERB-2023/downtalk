@@ -8,7 +8,7 @@ import {
   Query,
   Request,
 } from '@nestjs/common';
-import { Friend } from 'src/database/entity/friend.entity';
+import { Friend } from '../database/entity/friend.entity';
 import { FriendService } from './friend.service';
 
 @Controller('friends')

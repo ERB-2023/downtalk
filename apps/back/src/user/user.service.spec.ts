@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseModule } from 'src/database/database.module';
-import { userProviders } from 'src/database/providers/user.provider';
+import { User } from '../database/entity/user.entity';
+import { DatabaseModule } from '../database/database.module';
+import { userProviders } from '../database/providers/user.provider';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -15,13 +16,11 @@ describe('UserService', () => {
     service = module.get<UserService>(UserService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-
   describe('searchUsers', () => {
-    it('호출 시, Promise<Users> 타입 return', () => {
-      expect(service).toBeDefined();
+    it('호출 시, Promise<Users[]> 타입 return', () => {
+      return service.searchUsers('test', 10, 0).then((users) => {
+        expect(users.every((user) => user instanceof User)).toBeTruthy();
+      });
     });
   });
 });

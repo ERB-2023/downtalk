@@ -22,6 +22,8 @@ services:
     restart: always
     environment:
       DB_HOST: db
+      GOOGLE_USERINFO_API: https://www.googleapis.com/oauth2/v1/userinfo
+      JWT_SECRET: DOWNTALK_SECRET
     ports:
       - 4000:4000
     networks:

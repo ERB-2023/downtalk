@@ -19,7 +19,6 @@ export class HttpExceptionsFilter implements ExceptionFilter {
       data: '',
       message: exception.message,
     };
-
     Logger.error(
       `[${request.method}] ${request.url} - statusCode: ${statusCode}`,
       JSON.stringify(errorResponse),

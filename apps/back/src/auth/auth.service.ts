@@ -70,11 +70,11 @@ export class AuthService {
       expiresIn: '2h',
     });
 
-    const refreshtoken = this.jwtService.sign(user, {
+    const refreshToken = this.jwtService.sign(user, {
       expiresIn: '7d',
     });
 
-    const data = { accessToken, refreshtoken };
+    const data = { accessToken, refreshToken };
 
     return data;
   }

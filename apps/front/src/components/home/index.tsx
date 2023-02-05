@@ -25,7 +25,9 @@ function Home() {
         <GoogleLogin
           width="356px"
           onSuccess={(credentialResponse) => {
-            const res = req.loginByGoogle(credentialResponse.credential);
+            const res = req.loginByGoogle({
+              token: credentialResponse.credential,
+            });
             if (res.token) {
               localStorage.setItem("token", res.token);
             }

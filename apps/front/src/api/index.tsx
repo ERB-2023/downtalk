@@ -1,3 +1,5 @@
+const URL = "http://localhost:4000";
+
 const fetchRequest = (
   url: string,
   method: string,
@@ -27,6 +29,6 @@ const fetchRequest = (
 };
 
 export const loginByGoogle = (params: any) => {
-  const res = fetchRequest("http://localhost:4000" + "/auth", "POST", params);
+  const res = fetchRequest(URL + "/auth", "POST", params);
   return res;
 };

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  padding: 7px 23px;
+  gap: 16px;
+
+  font-size: 20px;
+  line-height: 29px;
+  letter-spacing: -0.05em;
+  color: #b6b6b6;
+
+  .item {
+    cursor: pointer;
+    &.selected {
+      position: relative;
+      color: #2b2b2b;
+      font-weight: 500;
+    }
+    &.selected::after {
+      content: "";
+      width: 100%;
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      border-top: 2px solid #2b2b2b;
+    }
+  }
+}

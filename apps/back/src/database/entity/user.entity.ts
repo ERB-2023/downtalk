@@ -1,11 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
-import { ChatRoom } from './chat-room.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { UserChatRoom } from './user-chat-room.entity';
 
 @Entity()
 export class User {
@@ -17,8 +11,10 @@ export class User {
 
   @Column({ nullable: false })
   email: string;
+  
+  @Column()
+  password: string;
 
-  @ManyToMany(() => ChatRoom)
-  @JoinTable({ name: 'user_chat_rooms' })
-  chatRooms: ChatRoom[];
+  @OneToMany(() => UserChatRoom, (chat) => chat.user)
+  chats: UserChatRoom[];
 }

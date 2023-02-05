@@ -1,1 +1,1 @@
-docker-compose build db phpmyadmin && docker-compose up db phpmyadmin
+docker-compose build && docker-compose up

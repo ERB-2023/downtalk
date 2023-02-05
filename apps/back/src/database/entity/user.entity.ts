@@ -15,6 +15,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  profile: string;
+
   @OneToMany(() => UserChatRoom, (chat) => chat.user)
   chats: UserChatRoom[];
 }

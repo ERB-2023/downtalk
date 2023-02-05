@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseModule } from 'src/database/database.module';
-import { friendProviders } from 'src/database/providers/friend.provider';
-import { userProviders } from 'src/database/providers/user.provider';
+import { DatabaseModule } from '../database/database.module';
+import { friendProviders } from '../database/providers/friend.provider';
+import { userProviders } from '../database/providers/user.provider';
 import { FriendController } from './friend.controller';
 import { FriendService } from './friend.service';
 

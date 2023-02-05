@@ -1,14 +1,14 @@
-import Lottie from 'react-lottie';
-import Image from 'next/image';
-import animationData from 'lottie/main-chatting.json';
-import styles from './index.module.scss';
+import Lottie from "react-lottie";
+import { GoogleLogin } from "@react-oauth/google";
+import animationData from "lottie/main-chatting.json";
+import styles from "./index.module.scss";
 
 function Home() {
   const mainChattingOptions = {
     loop: true,
     autoplay: true,
     animationData,
-    rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+    rendererSettings: { preserveAspectRatio: "xMidYMid slice" },
   };
   return (
     <div className={styles.container}>
@@ -19,10 +19,18 @@ function Home() {
           <Lottie options={mainChattingOptions} height={254} width={254} />
         </div>
       </div>
-      <button type="button" className={styles.google}>
-        <Image className={styles.logo} src="/images/google-logo.svg" alt="google logo" width="34" height="34" />
-        <p>구글로 시작하기</p>
-      </button>
+
+      <div type="button" className={styles.google}>
+        <GoogleLogin
+          width="356px"
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+      </div>
     </div>
   );
 }

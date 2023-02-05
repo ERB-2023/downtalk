@@ -1,4 +1,4 @@
-import { FRIEND_STATUS } from 'src/common/enum/friend.enum';
+import { FRIEND_STATUS } from '../../common/enum/friend.enum';
 import {
   Entity,
   Column,

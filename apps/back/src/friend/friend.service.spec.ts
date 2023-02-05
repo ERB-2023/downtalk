@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { User } from 'src/database/entity/user.entity';
 import { DatabaseModule } from '../database/database.module';
 import { friendProviders } from '../database/providers/friend.provider';
 import { userProviders } from '../database/providers/user.provider';
@@ -20,9 +21,21 @@ describe('FriendService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('findFreidns', () => {
-    it('호출 시, Promise<Friend[]> 타입 return', () => {});
+  describe('findFriends', () => {
+    it('호출 시, Promise<Friend[]> 타입 return', () => {
+      let userId: number;
+      return service.findFriends(userId, 10, 0).then((friends) => {
+        expect(friends.every((friend) => friend instanceof User)).toBeTruthy();
+
+        friends.forEach((friend) => {
+          expect(friend).toHaveProperty('id');
+          expect(friend).toHaveProperty('name');
+          expect(friend).toHaveProperty('image');
+        });
+      });
+    });
   });
+
   describe('addFriend', () => {
     it('호출 시, Promise<void> 타입 return', () => {});
   });

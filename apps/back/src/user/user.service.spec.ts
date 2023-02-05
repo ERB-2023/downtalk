@@ -20,6 +20,12 @@ describe('UserService', () => {
     it('호출 시, Promise<Users[]> 타입 return', () => {
       return service.searchUsers('test', 10, 0).then((users) => {
         expect(users.every((user) => user instanceof User)).toBeTruthy();
+
+        users.forEach((user) => {
+          expect(user).toHaveProperty('id');
+          expect(user).toHaveProperty('name');
+          expect(user).toHaveProperty('profile');
+        });
       });
     });
   });

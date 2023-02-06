@@ -9,8 +9,6 @@ services:
   #   restart: always
   #   ports:
   #     - 3000:3000
-  #   networks:
-  #     - app_network
 
   api:
     depends_on:
@@ -22,14 +20,12 @@ services:
       dockerfile: ./apps/back/api.Dockerfile
     restart: always
     environment:
-      DB_HOST: db
+      DB_HOST: mysql
       GOOGLE_USERINFO_API: https://www.googleapis.com/oauth2/v1/userinfo
       JWT_SECRET: DOWNTALK_SECRET
     ports:
       - 4000:4000
-    networks:
-      - app_network
-
+    
   chat:
     depends_on:
       - mysql
@@ -40,12 +36,10 @@ services:
       dockerfile: ./apps/back/chat.Dockerfile
     restart: always
     environment:
-      DB_HOST: db
+      DB_HOST: mysql
     ports:
       - 4001:4001
-    networks:
-      - app_network
-
+    
   mysql:
     image: mysql:8.0
     container_name: mysql
@@ -58,9 +52,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: downchat
-    networks:
-      - app_network
-
+    
   mongo:
     image: mongo
     container_name: mongo
@@ -84,15 +76,7 @@ services:
     ports:
       - "8080:80"
     environment:
-      PMA_HOST: db
-    networks:
-      - app_network
-
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-networks:
-  app_network:
-    external: true
-
+      PMA_HOST: mysql
+    
 volumes:
   db_data:

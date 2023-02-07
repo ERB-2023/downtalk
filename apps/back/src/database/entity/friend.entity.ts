@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  DeleteDateColumn,
+  CreateDateColumn,
 } from 'typeorm';
 import { User } from './user.entity';
 
@@ -33,4 +35,10 @@ export class Friend {
     default: FRIEND_STATUS.FRIEND,
   })
   status: FRIEND_STATUS;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @DeleteDateColumn()
+  deleteAt: Date;
 }

@@ -2,7 +2,9 @@ import {
   Body,
   Controller,
   DefaultValuePipe,
+  Delete,
   Get,
+  Param,
   ParseIntPipe,
   Post,
   Query,
@@ -30,5 +32,13 @@ export class FriendController {
     @Body('userId') addressedUserId: number,
   ): Promise<void> {
     return this.friendService.addFriend(req.user.id, addressedUserId);
+  }
+
+  @Delete(':friendId')
+  async deleteFriend(
+    @Request() req: { user: { id: number } },
+    @Param('friendId') friendId: number,
+  ): Promise<boolean> {
+    return this.friendService.deleteFriend(req.user.id, friendId);
   }
 }

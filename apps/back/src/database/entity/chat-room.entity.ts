@@ -17,6 +17,9 @@ export class ChatRoom {
   @Column()
   name: string;
 
+  @Column()
+  image: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

@@ -8,13 +8,8 @@ function Chatting() {
   };
   return (
     <div className={styles.container}>
-      <Image
-        src=""
-        width={70}
-        height={70}
-        alt={chatting.name}
-        className={styles.temp_image}
-      />
+      <div className={styles.temp_image} />
+      {/* TODO: 이미지 컴포넌트로 교체 */}
       {chatting.name} ({chatting.count})
     </div>
   );

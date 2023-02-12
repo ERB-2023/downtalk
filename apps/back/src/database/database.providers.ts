@@ -7,10 +7,10 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: process.env.DB_HOST,
+        host: process.env.MYSQL_CONTAINER_NAME,
         port: 3306,
         username: 'root',
-        password: 'root',
+        password: process.env.MYSQL_ROOT_PASSWORD,
         database: 'downchat',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,

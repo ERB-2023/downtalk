@@ -1,9 +1,9 @@
 import MainComponent from "components/Main";
 import { useRouter } from "next/router";
 
-function Main() {
+function MainFriend() {
   const { route } = useRouter();
   return <MainComponent currentURL={route} />;
 }
 
-export default Main;
+export default MainFriend;

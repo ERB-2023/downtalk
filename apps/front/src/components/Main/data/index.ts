@@ -1,4 +1,4 @@
-export const CHAT = "chat";
+export const CHAT = "main";
 export const FRIEND = "friend";
 
 export const tabs = [

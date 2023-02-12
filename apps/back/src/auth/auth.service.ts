@@ -6,7 +6,6 @@ import { GoogleAuthFailException } from 'src/common/exception/auth.exception';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { createHmac } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -31,19 +30,18 @@ export class AuthService {
     }
   }
 
-  async findUser(ci: string) {
+  async findUser(email: string) {
     const row = await this.userRepository.findOne({
       where: {
-        ci,
+        email,
       },
     });
 
     return row ? true : false;
   }
 
-  async registerUser(ci: string, email: string, name: string) {
+  async registerUser(email: string, name: string) {
     await this.userRepository.save({
-      ci,
       email,
       name,
     });
@@ -61,23 +59,16 @@ export class AuthService {
     return row ? true : false;
   }
 
-  async generateCi(email: string) {
-    const ci = createHmac('sha256', process.env.JWT_SECRET)
-      .update(email)
-      .digest('base64');
-    return ci;
-  }
-
-  async generateToken(ci: string) {
+  async generateToken(email: string) {
     const accessToken = this.jwtService.sign(
-      { ci },
+      { email },
       {
         expiresIn: '2h',
       },
     );
 
     const refreshToken = this.jwtService.sign(
-      { ci },
+      { email },
       {
         expiresIn: '7d',
       },

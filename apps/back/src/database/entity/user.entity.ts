@@ -7,15 +7,12 @@ export class User {
   id: number;
 
   @Column()
-  ci: string;
-
-  @Column()
   name: string;
 
-  @Column({ nullable: false })
+  @Column()
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   profile: string;
 
   @OneToMany(() => UserChatRoom, (chat) => chat.user)

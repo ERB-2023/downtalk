@@ -1,0 +1,51 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  font-family: "Noto Sans KR";
+  height: 100%;
+
+  .title_section {
+    margin: 4px 0 8px;
+    p {
+      padding: 7px 24px 8px;
+      background-color: #ffffff;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 29px;
+      letter-spacing: -0.05em;
+      color: #2b2b2b;
+    }
+  }
+
+  .options_list {
+    padding: 0 24px;
+    background-color: #ffffff;
+
+    p {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 23px;
+      letter-spacing: -0.05em;
+    }
+
+    .options_line {
+      position: relative;
+      padding: 12px 0 12px;
+
+      .options_icon {
+        position: absolute;
+        right: 0;
+        top: 12px;
+      }
+
+      p {
+        color: #2b2b2b;
+      }
+    }
+
+    .options_subtitle {
+      color: #909090 !important;
+    }
+  }
+}

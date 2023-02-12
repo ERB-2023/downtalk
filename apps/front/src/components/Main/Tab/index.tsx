@@ -10,7 +10,6 @@ function Tab() {
   ];
   const [selectedTab, setSelectedTab] = useState<string>(CHAT);
 
-  console.log(selectedTab);
   const onClickTabItem = (e: React.MouseEvent<HTMLInputElement>) => {
     setSelectedTab(e.currentTarget.id);
   };

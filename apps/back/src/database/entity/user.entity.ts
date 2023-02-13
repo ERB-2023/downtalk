@@ -15,7 +15,8 @@ export class User {
   @Column({ nullable: false })
   email: string;
 
-  @Column()
+  //TODO: modify profile default value
+  @Column({ default: 's3 url or file path' })
   profile: string;
 
   @OneToMany(() => UserChatRoom, (chat) => chat.user)

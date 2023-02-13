@@ -1,1 +1,2 @@
-docker-compose build db phpmyadmin && docker-compose up db phpmyadmin
+#!/bin/bash
+docker-compose build mysql phpmyadmin mongo && docker-compose up mysql phpmyadmin mongo

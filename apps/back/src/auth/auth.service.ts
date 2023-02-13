@@ -3,10 +3,10 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { loginDto } from 'src/common/dto/loginDto';
 import { GoogleAuthFailException } from 'src/common/exception/auth.exception';
-import { googleUserinfoDto } from 'src/common/dto/googleUserinfoDto';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
+import { createHmac } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -27,26 +27,23 @@ export class AuthService {
 
       return response.data;
     } catch (e) {
-      throw new GoogleAuthFailException(e.toString());
+      throw new GoogleAuthFailException();
     }
   }
 
-  async findUser(user: googleUserinfoDto) {
-    const email = user.email;
+  async findUser(ci: string) {
     const row = await this.userRepository.findOne({
       where: {
-        email,
+        ci,
       },
     });
 
     return row ? true : false;
   }
 
-  async registerUser(user: googleUserinfoDto) {
-    const email = user.email;
-    const name = user.name;
-
+  async registerUser(ci: string, email: string, name: string) {
     await this.userRepository.save({
+      ci,
       email,
       name,
     });
@@ -54,8 +51,7 @@ export class AuthService {
     return true;
   }
 
-  async loginUser(user: googleUserinfoDto) {
-    const email = user.email;
+  async loginUser(email: string) {
     const row = await this.userRepository.findOne({
       where: {
         email,
@@ -65,14 +61,27 @@ export class AuthService {
     return row ? true : false;
   }
 
-  async generateToken(user: googleUserinfoDto) {
-    const accessToken = this.jwtService.sign(user, {
-      expiresIn: '2h',
-    });
+  async generateCi(email: string) {
+    const ci = createHmac('sha256', process.env.JWT_SECRET)
+      .update(email)
+      .digest('base64');
+    return ci;
+  }
 
-    const refreshToken = this.jwtService.sign(user, {
-      expiresIn: '7d',
-    });
+  async generateToken(ci: string) {
+    const accessToken = this.jwtService.sign(
+      { ci },
+      {
+        expiresIn: '2h',
+      },
+    );
+
+    const refreshToken = this.jwtService.sign(
+      { ci },
+      {
+        expiresIn: '7d',
+      },
+    );
 
     const data = { accessToken, refreshToken };
 

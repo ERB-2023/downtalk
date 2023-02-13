@@ -6,6 +6,7 @@ import { userProviders } from 'src/database/providers/user.provider';
 import { DatabaseModule } from 'src/database/database.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './auth.startegy';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { ConfigService } from '@nestjs/config';
       }),
     }),
   ],
-  providers: [AuthService, ...userProviders],
+  providers: [AuthService, ...userProviders, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

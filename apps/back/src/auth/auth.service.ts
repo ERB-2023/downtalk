@@ -6,6 +6,11 @@ import { GoogleAuthFailException } from 'src/common/exception/auth.exception';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
+import { createCipheriv, randomBytes, createDecipheriv } from 'crypto';
+
+const algorithm = 'aes-256-cbc';
+const iv = randomBytes(16);
+const key = Buffer.from(randomBytes(32));
 
 @Injectable()
 export class AuthService {
@@ -60,15 +65,16 @@ export class AuthService {
   }
 
   async generateToken(email: string) {
+    const ci = await this.generateCi(email);
     const accessToken = this.jwtService.sign(
-      { email },
+      { ci },
       {
         expiresIn: '2h',
       },
     );
 
     const refreshToken = this.jwtService.sign(
-      { email },
+      { ci },
       {
         expiresIn: '7d',
       },
@@ -77,5 +83,26 @@ export class AuthService {
     const data = { accessToken, refreshToken };
 
     return data;
+  }
+
+  async generateCi(email: string) {
+    const cipher = createCipheriv(algorithm, Buffer.from(key), iv);
+    const encrypted = cipher.update(email);
+
+    return (
+      iv.toString('hex') +
+      ':' +
+      Buffer.concat([encrypted, cipher.final()]).toString('hex')
+    );
+  }
+
+  async verifyCi(ci: any) {
+    const textParts = ci.split(':');
+    const iv = Buffer.from(textParts.shift(), 'hex');
+    const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+    const decipher = createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    const decrypted = decipher.update(encryptedText);
+
+    return Buffer.concat([decrypted, decipher.final()]).toString();
   }
 }

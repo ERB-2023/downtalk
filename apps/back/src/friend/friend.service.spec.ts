@@ -39,4 +39,10 @@ describe('FriendService', () => {
   describe('addFriend', () => {
     it('호출 시, Promise<void> 타입 return', () => {});
   });
+
+  describe('deleteFriend', () => {
+    it('friend가 없는 경우 FriendNotFound Exception 반환', () => {});
+
+    it('friend가 있는 경우 삭제 후 boolean 반환', () => {});
+  });
 });

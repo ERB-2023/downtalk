@@ -2,6 +2,7 @@ import Lottie from "react-lottie";
 import { GoogleLogin } from "@react-oauth/google";
 import animationData from "lottie/main-chatting.json";
 import styles from "./index.module.scss";
+import * as req from "api";
 
 function Home() {
   const mainChattingOptions = {
@@ -24,6 +25,12 @@ function Home() {
         <GoogleLogin
           width="356px"
           onSuccess={(credentialResponse) => {
+            const res = req.loginByGoogle({
+              token: credentialResponse.credential,
+            });
+            if (res.token) {
+              localStorage.setItem("token", res.token);
+            }
             console.log(credentialResponse);
           }}
           onError={() => {

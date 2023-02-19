@@ -4,8 +4,8 @@ import classNames from "classnames/bind";
 import styles from "./index.module.scss";
 
 interface FormValue {
-  id: string;
-  nickname: string;
+  email: string;
+  name: string;
 }
 
 const cn = classNames.bind(styles);
@@ -43,14 +43,14 @@ const Profile = () => {
 
       <form onSumbit={handleSubmit(onSubmitHandler)}>
         <div className={styles.form_section}>
-          <label>아이디</label>
-          <input {...register("id")} />
-          <span>{watch("id") ? watch("id").length : 0}/ 16</span>
+          <label>이메일</label>
+          <input {...register("email")} />
+          <span>{watch("email") ? watch("email").length : 0}/ 16</span>
         </div>
         <div className={styles.form_section}>
-          <label>닉네임</label>
-          <input {...register("nickname")} />
-          <span>{watch("nickname") ? watch("nickname").length : 0}/ 16</span>
+          <label>이름</label>
+          <input {...register("name")} />
+          <span>{watch("name") ? watch("name").length : 0}/ 16</span>
         </div>
         <button
           type="submit"

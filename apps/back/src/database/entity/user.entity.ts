@@ -15,7 +15,7 @@ export class User {
   @Column({ nullable: false })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   profile: string;
 
   @OneToMany(() => UserChatRoom, (chat) => chat.user)

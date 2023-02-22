@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 90px;
+  padding: 10px;
+  background-color: #fff;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: -0.05em;
+  color: #2b2b2b;
+
+  img {
+    margin-right: 8px;
+    border-radius: 10px;
+  }
+}

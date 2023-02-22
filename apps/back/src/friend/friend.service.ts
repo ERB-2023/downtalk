@@ -5,6 +5,7 @@ import { UserNotFoundException } from '../common/exception/user.exception';
 import { Friend } from '../database/entity/friend.entity';
 import { User } from '../database/entity/user.entity';
 import { Repository } from 'typeorm';
+import { FriendNotFound } from './friend.exception';
 
 @Injectable()
 export class FriendService {
@@ -58,5 +59,22 @@ export class FriendService {
 
     this.friendRepository.save(friendship);
     return;
+  }
+
+  async deleteFriend(userId: number, friendId: number): Promise<boolean> {
+    const friendship = await this.friendRepository.findOne({
+      where: {
+        requestUser: { id: userId },
+        addressedUser: { id: friendId },
+      },
+    });
+
+    if (!friendship) throw new FriendNotFound();
+
+    const deleteFriend: Friend = await this.friendRepository.softRemove(
+      friendship,
+    );
+
+    return !!deleteFriend.deleteAt;
   }
 }

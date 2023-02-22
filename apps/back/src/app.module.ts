@@ -11,6 +11,7 @@ import { FriendModule } from './friend/friend.module';
 import { HttpExceptionsFilter } from './common/filter/exception.filter';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     FriendModule,
     DatabaseModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [

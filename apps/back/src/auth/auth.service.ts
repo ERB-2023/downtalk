@@ -6,7 +6,11 @@ import { GoogleAuthFailException } from 'src/common/exception/auth.exception';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { createHmac } from 'crypto';
+import { createCipheriv, randomBytes, createDecipheriv } from 'crypto';
+
+const algorithm = 'aes-256-cbc';
+const iv = randomBytes(16);
+const key = Buffer.from(randomBytes(32));
 
 @Injectable()
 export class AuthService {
@@ -31,19 +35,18 @@ export class AuthService {
     }
   }
 
-  async findUser(ci: string) {
+  async findUser(email: string) {
     const row = await this.userRepository.findOne({
       where: {
-        ci,
+        email,
       },
     });
 
     return row ? true : false;
   }
 
-  async registerUser(ci: string, email: string, name: string) {
+  async registerUser(email: string, name: string) {
     await this.userRepository.save({
-      ci,
       email,
       name,
     });
@@ -61,14 +64,8 @@ export class AuthService {
     return row ? true : false;
   }
 
-  async generateCi(email: string) {
-    const ci = createHmac('sha256', process.env.JWT_SECRET)
-      .update(email)
-      .digest('base64');
-    return ci;
-  }
-
-  async generateToken(ci: string) {
+  async generateToken(email: string) {
+    const ci = await this.generateCi(email);
     const accessToken = this.jwtService.sign(
       { ci },
       {
@@ -86,5 +83,26 @@ export class AuthService {
     const data = { accessToken, refreshToken };
 
     return data;
+  }
+
+  async generateCi(email: string) {
+    const cipher = createCipheriv(algorithm, Buffer.from(key), iv);
+    const encrypted = cipher.update(email);
+
+    return (
+      iv.toString('hex') +
+      ':' +
+      Buffer.concat([encrypted, cipher.final()]).toString('hex')
+    );
+  }
+
+  async verifyCi(ci: any) {
+    const textParts = ci.split(':');
+    const iv = Buffer.from(textParts.shift(), 'hex');
+    const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+    const decipher = createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    const decrypted = decipher.update(encryptedText);
+
+    return Buffer.concat([decrypted, decipher.final()]).toString();
   }
 }

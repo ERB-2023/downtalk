@@ -7,16 +7,12 @@ export class User {
   id: number;
 
   @Column()
-  ci: string;
-
-  @Column()
   name: string;
 
-  @Column({ nullable: false })
+  @Column()
   email: string;
 
-  //TODO: modify profile default value
-  @Column({ default: 's3 url or file path' })
+  @Column({ nullable: true })
   profile: string;
 
   @OneToMany(() => UserChatRoom, (chat) => chat.user)

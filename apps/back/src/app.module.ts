@@ -11,17 +11,20 @@ import { FriendModule } from './friend/friend.module';
 import { HttpExceptionsFilter } from './common/filter/exception.filter';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '../../.env',
     }),
     ChatModule,
     AuthModule,
     UserModule,
     FriendModule,
     DatabaseModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [

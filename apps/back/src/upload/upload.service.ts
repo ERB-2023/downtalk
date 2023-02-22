@@ -18,7 +18,9 @@ export class UploadService {
       const result = await this.s3
         .upload({
           Bucket: this.configService.get<string>('AWS_S3_BUCKET'),
-          Key: `profile/${userId}${Date.now().toString()}-${file.originalname}`,
+          Key: `profile/${userId}/${Date.now().toString()}-${
+            file.originalname
+          }`,
           Body: file.buffer,
         })
         .promise();

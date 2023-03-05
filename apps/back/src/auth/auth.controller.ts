@@ -17,7 +17,6 @@ export class AuthController {
   @Post()
   async login(@Body() req: loginDto) {
     const user = await this.authService.checkGoogleUser(req);
-
     const ExistedUser = await this.authService.findUser(user.email);
 
     if (!ExistedUser) {

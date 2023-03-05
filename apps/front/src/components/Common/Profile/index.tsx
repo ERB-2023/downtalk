@@ -6,12 +6,19 @@ interface ProfileProps {
   editable: boolean;
   size?: "small" | "big";
   profile?: string; // 추후에 옵셔널 빼야함
+  className?: string | undefined;
 }
-function Profile({ deletable, editable, size = "small" }: ProfileProps) {
+function Profile({
+  deletable,
+  editable,
+  size = "small",
+  profile,
+  className,
+}: ProfileProps) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className}`}>
       <Image
-        src="/images/default-profile.png"
+        src={profile || "/images/default-profile.png"}
         width={size === "small" ? 43 : 72}
         height={size === "small" ? 43 : 72}
         alt="profile"

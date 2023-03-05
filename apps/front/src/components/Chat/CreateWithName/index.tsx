@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "components/Common/Button";
 import Input from "components/Common/Input";
 import MemberIcon from "components/Common/MemberIcon";
 import Profile from "components/Common/Profile";
@@ -41,6 +42,9 @@ function Create() {
           <MemberIcon name="제이드" />
         </div>
       </div>
+      <Button disabled={false} onClick={() => console.log(chatName)}>
+        완료
+      </Button>
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.container {
+  position: relative;
+  width: fit-content;
+
+  .icon {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+  }
+}

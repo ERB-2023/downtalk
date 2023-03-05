@@ -6,7 +6,11 @@ import styles from "./index.module.scss";
 function Create() {
   return (
     <div className={styles.container}>
-      <div>채팅방 만들기</div>
+      <div>
+        <button>{`<`}</button>
+        채팅방 만들기
+      </div>
+      {/* 대충 만든 임시 헤더 교체 필요 */}
       <div className={styles.wrapper}>
         <SearchBar />
         <div className={styles.members}>

@@ -24,7 +24,6 @@ function Create() {
       </div>
       <MemberRow name="christina" checked />
       <MemberRow name="christina" />
-      <Profile editable deletable={false} size="big" />
     </div>
   );
 }

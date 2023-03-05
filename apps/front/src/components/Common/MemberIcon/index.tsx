@@ -10,7 +10,7 @@ interface MemberIconProps {
 function MemberIcon({ deletable = true, name }: MemberIconProps) {
   return (
     <div className={styles.container}>
-      <Profile deletable={deletable} />
+      <Profile editable={false} deletable={deletable} />
       <p className={styles.name}>{name}</p>
     </div>
   );

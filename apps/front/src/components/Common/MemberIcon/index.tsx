@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Profile from "../Profile";
 import styles from "./index.module.scss";
 

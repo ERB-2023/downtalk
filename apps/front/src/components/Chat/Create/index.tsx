@@ -1,6 +1,5 @@
 import MemberIcon from "components/Common/MemberIcon";
 import MemberRow from "components/Common/MemberRow";
-import Profile from "components/Common/Profile";
 import SearchBar from "components/Common/SearchBar";
 import { useRouter } from "next/router";
 import styles from "./index.module.scss";

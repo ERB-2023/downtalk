@@ -12,6 +12,11 @@ const algorithm = 'aes-256-cbc';
 const iv = randomBytes(16);
 const key = Buffer.from(randomBytes(32));
 
+interface GoogleUser {
+  name: string;
+  email: string;
+}
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -21,15 +26,16 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async checkGoogleUser(req: loginDto) {
+  async checkGoogleUser(req: loginDto): Promise<GoogleUser> {
     try {
-      const response = await firstValueFrom(
-        this.httpService.get(
-          process.env.GOOGLE_USERINFO_API + `?access_token=${req.token}`,
-        ),
-      );
+      // const response = await firstValueFrom(
+      //   this.httpService.get(
+      //     'https://www.googleapis.com/oauth2/v1/tokeninfo' +
+      //       `?access_token=${req.token}`,
+      //   ),
+      // );
 
-      return response.data;
+      return this.jwtService.decode(req.token) as GoogleUser;
     } catch (e) {
       throw new GoogleAuthFailException();
     }

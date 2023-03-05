@@ -60,18 +60,17 @@ export class AuthService {
     return true;
   }
 
-  async loginUser(email: string) {
-    const row = await this.userRepository.findOne({
+  async loginUser(email: string): Promise<User> {
+    return this.userRepository.findOne({
       where: {
         email,
       },
     });
-
-    return row ? true : false;
   }
 
   async generateToken(email: string) {
-    const ci = await this.generateCi(email);
+    const user = await this.loginUser(email);
+    const ci = await this.generateCi(user.id);
     const accessToken = this.jwtService.sign(
       { ci },
       {
@@ -91,24 +90,28 @@ export class AuthService {
     return data;
   }
 
-  async generateCi(email: string) {
-    const cipher = createCipheriv(algorithm, Buffer.from(key), iv);
-    const encrypted = cipher.update(email);
+  async generateCi(userId: number) {
+    // const cipher = createCipheriv(algorithm, Buffer.from(key), iv);
+    // const encrypted = cipher.update(email);
 
-    return (
-      iv.toString('hex') +
-      ':' +
-      Buffer.concat([encrypted, cipher.final()]).toString('hex')
-    );
+    // return (
+    //   iv.toString('hex') +
+    //   ':' +
+    //   Buffer.concat([encrypted, cipher.final()]).toString('hex')
+    // );
+
+    return userId;
   }
 
   async verifyCi(ci: any) {
-    const textParts = ci.split(':');
-    const iv = Buffer.from(textParts.shift(), 'hex');
-    const encryptedText = Buffer.from(textParts.join(':'), 'hex');
-    const decipher = createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
-    const decrypted = decipher.update(encryptedText);
+    // const textParts = ci.split(':');
+    // const iv = Buffer.from(textParts.shift(), 'hex');
+    // const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+    // const decipher = createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    // const decrypted = decipher.update(encryptedText);
 
-    return Buffer.concat([decrypted, decipher.final()]).toString();
+    // return Buffer.concat([decrypted, decipher.final()]).toString();
+
+    return ci;
   }
 }

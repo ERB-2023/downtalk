@@ -1,4 +1,5 @@
 import MemberIcon from "components/Common/MemberIcon";
+import MemberRow from "components/Common/MemberRow";
 import SearchBar from "components/Common/SearchBar";
 import styles from "./index.module.scss";
 
@@ -13,6 +14,8 @@ function Create() {
           <MemberIcon name="제이드" />
         </div>
       </div>
+      <MemberRow name="christina" checked />
+      <MemberRow name="christina" />
     </div>
   );
 }

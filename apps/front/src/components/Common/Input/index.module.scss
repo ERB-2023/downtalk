@@ -3,4 +3,19 @@
   height: 40px;
   border: 1px solid #c9c9c9;
   border-radius: 10px;
+  padding: 6px;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+.length {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #898989;
+  text-align: end;
+  margin-top: 2px;
 }

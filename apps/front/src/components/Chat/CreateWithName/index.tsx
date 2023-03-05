@@ -1,13 +1,13 @@
+import { useState } from "react";
 import Input from "components/Common/Input";
 import MemberIcon from "components/Common/MemberIcon";
-import MemberRow from "components/Common/MemberRow";
 import Profile from "components/Common/Profile";
-import SearchBar from "components/Common/SearchBar";
 import { useRouter } from "next/router";
 import styles from "./index.module.scss";
 
 function Create() {
   const router = useRouter();
+  const [chatName, setChatName] = useState<string>("");
   return (
     <div className={styles.container}>
       <div>
@@ -23,8 +23,13 @@ function Create() {
           className={styles.profile}
         />
         <div className={styles.chat_name}>
-          <p>채팅방 이름</p>
-          <Input />
+          <p className={styles.label}>채팅방 이름</p>
+          <Input
+            length={chatName?.length}
+            value={chatName}
+            onChange={(e) => setChatName(e.currentTarget.value)}
+            maxLength={16}
+          />
         </div>
         <div className={styles.members}>
           <MemberIcon

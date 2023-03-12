@@ -7,7 +7,7 @@ export class UserController {
 
   @Get()
   async searchUsers(@Query('searchKey') searchKey: string) {
-    return this.userService.searchUsers(searchKey);
+    return this.userService.searchUser(searchKey);
   }
 
   @Get('/:userId/profile')

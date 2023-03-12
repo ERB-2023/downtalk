@@ -18,10 +18,13 @@ export class UserController {
   @Get()
   async searchUsers(
     @Query('searchKey') searchKey: string,
-    @Query('limit', ParseIntPipe) limit: number,
-    @Query('offset', ParseIntPipe) offset: number,
+    @Query('limit') limit: string = '10',
+    @Query('offset') offset: string = '0',
   ) {
-    return this.userService.searchUsers(searchKey, limit, offset);
+    const parsedLimit = parseInt(limit, 10);
+    const parsedOffset = parseInt(offset, 10);
+
+    return this.userService.searchUsers(searchKey, parsedLimit, parsedOffset);
   }
 
   @Get('/:userId/profile')

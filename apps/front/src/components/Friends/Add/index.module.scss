@@ -25,5 +25,19 @@
         margin-top: 12px;
       }
     }
+
+    .no_user {
+      display: flex;
+      height: 80%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 29px;
+      letter-spacing: -0.05em;
+      color: #898989;
+    }
   }
 }

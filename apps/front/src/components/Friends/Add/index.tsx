@@ -17,7 +17,9 @@ interface UserResult {
 function Add() {
   const router = useRouter();
   const [searchMemberValue, setSearchMemberValue] = useState<string>("");
-  const [userResult, setUserResult] = useState<UserResult | null>(null);
+  const [userResult, setUserResult] = useState<UserResult | null | undefined>(
+    undefined
+  );
   const onClickSearch = async () => {
     const response = await getUserByEmailOrNickname(searchMemberValue);
     const userData = await response.json();
@@ -45,8 +47,11 @@ function Add() {
             <p>{userResult.name}</p>
           </div>
         )}
+        {userResult === null && (
+          <p className={styles.no_user}>사용자를 찾을 수 없습니다.</p>
+        )}
       </div>
-      <Button disabled={true} onClick={() => console.log("test")}>
+      <Button disabled={!userResult} onClick={() => console.log(userResult)}>
         추가
       </Button>
     </div>

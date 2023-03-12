@@ -5,7 +5,7 @@ interface ProfileProps {
   deletable: boolean;
   editable: boolean;
   size?: "small" | "big" | "extra";
-  profile?: string; // 추후에 옵셔널 빼야함
+  profile?: string | null; // 추후에 옵셔널 빼야함
   className?: string | undefined;
 }
 function Profile({

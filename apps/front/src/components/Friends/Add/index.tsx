@@ -22,7 +22,6 @@ function Add() {
     const response = await getUserByEmailOrNickname(searchMemberValue);
     const userData = await response.json();
     setUserResult(userData.data);
-    console.log(userData.data);
   };
 
   return (
@@ -35,12 +34,17 @@ function Add() {
           onChange={(e) => setSearchMemberValue(e.currentTarget.value)}
           onSearchClick={onClickSearch}
         />
-        {/* {userResult && ( */}
-        <div className={styles.profile}>
-          <Profile deletable={false} editable={false} size="extra" />
-          <p>제이드</p>
-        </div>
-        {/* )} */}
+        {userResult && (
+          <div className={styles.profile}>
+            <Profile
+              deletable={false}
+              editable={false}
+              size="extra"
+              profile={userResult.profile}
+            />
+            <p>{userResult.name}</p>
+          </div>
+        )}
       </div>
       <Button disabled={true} onClick={() => console.log("test")}>
         추가

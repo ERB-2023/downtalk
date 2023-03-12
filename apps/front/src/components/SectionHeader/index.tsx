@@ -3,9 +3,10 @@ import styles from "./index.module.scss";
 
 type sectionHeaderProps = {
   title: string;
+  onClickLeft?: () => void;
 };
 
-const SectionHeader = ({ title }: sectionHeaderProps) => {
+const SectionHeader = ({ title, onClickLeft }: sectionHeaderProps) => {
   return (
     <div className={styles.content}>
       <Image
@@ -14,6 +15,7 @@ const SectionHeader = ({ title }: sectionHeaderProps) => {
         width={16}
         height={22}
         className={styles.options_icon}
+        onClick={onClickLeft}
       />
       <p>{title}</p>
     </div>

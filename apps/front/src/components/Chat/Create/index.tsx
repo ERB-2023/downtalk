@@ -1,22 +1,22 @@
+import { useState } from "react";
 import MemberIcon from "components/Common/MemberIcon";
 import MemberRow from "components/Common/MemberRow";
-import Profile from "components/Common/Profile";
 import SearchBar from "components/Common/SearchBar";
+import SectionHeader from "components/SectionHeader";
 import { useRouter } from "next/router";
 import styles from "./index.module.scss";
 
 function Create() {
   const router = useRouter();
+  const [searchMemberValue, setSearchMemberValue] = useState<string>("");
   return (
     <div className={styles.container}>
-      <div>
-        <button onClick={() => router.back()}>{`<`}</button>
-        채팅방 만들기
-        <button>{`>`}</button>
-      </div>
-      {/* 대충 만든 임시 헤더 교체 필요 */}
+      <SectionHeader title="채팅방 만들기" onClickLeft={() => router.back()} />
       <div className={styles.wrapper}>
-        <SearchBar />
+        <SearchBar
+          value={searchMemberValue}
+          onChange={(e) => setSearchMemberValue(e.currentTarget.value)}
+        />
         <div className={styles.members}>
           <MemberIcon name="크리스티나" />
           <MemberIcon name="제이드" />

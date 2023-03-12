@@ -20,7 +20,7 @@ export class ResponseFormatInterceptor<T>
       map((data) => ({
         statusCode: context.switchToHttp().getResponse().statusCode,
         data: data,
-        message: data.message || '',
+        message: (data && data.message) || '',
       })),
     );
   }

@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 43px;
+  .profile {
+    position: relative;
+
+    .delete {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+    }
+  }
+
+  .name {
+    margin-top: 6px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.05em;
+    color: #2b2b2b;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

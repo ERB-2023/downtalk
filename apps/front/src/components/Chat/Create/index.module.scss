@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .wrapper {
+    padding: 0 28px;
+
+    .members {
+      display: flex;
+      gap: 16px;
+      padding-top: 20px;
+    }
+  }
+}

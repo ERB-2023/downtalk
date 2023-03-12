@@ -10,18 +10,9 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async searchUsers(
-    searchKey: string,
-    limit: number,
-    offset: number,
-  ): Promise<User[]> {
-    return this.userRepository.find({
-      where: [
-        { email: Like(`%${searchKey}%`) },
-        { name: Like(`%${searchKey}%`) },
-      ],
-      take: limit,
-      skip: offset,
+  async searchUser(searchKey: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: [{ email: searchKey }],
     });
   }
 

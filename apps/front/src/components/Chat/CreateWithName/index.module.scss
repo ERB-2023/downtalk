@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+
+  .wrapper {
+    padding: 0 28px;
+    flex-grow: 1;
+
+    .profile {
+      margin: 22px auto;
+    }
+
+    .chat_name {
+      padding: 8px 0;
+      .label {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 23px;
+        letter-spacing: -0.05em;
+        color: #2b2b2b;
+        margin-bottom: 12px;
+      }
+    }
+
+    .members {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0 12px;
+    }
+  }
+}

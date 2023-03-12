@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+
+  .wrapper {
+    padding: 30px 28px;
+    flex: 1;
+    p {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 23px;
+      letter-spacing: -0.05em;
+      color: #2b2b2b;
+      margin-bottom: 12px;
+    }
+
+    .profile {
+      display: flex;
+      height: 70%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      p {
+        margin-top: 12px;
+      }
+    }
+  }
+}

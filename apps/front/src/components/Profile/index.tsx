@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import classNames from "classnames/bind";
+import Image from "next/image";
 import styles from "./index.module.scss";
 
 interface FormValue {

@@ -1,8 +1,11 @@
 import Lottie from "react-lottie";
 import { GoogleLogin } from "@react-oauth/google";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import animationData from "lottie/main-chatting.json";
 import styles from "./index.module.scss";
 import * as req from "api";
+import { login } from "store";
 
 function Home() {
   const mainChattingOptions = {
@@ -11,6 +14,20 @@ function Home() {
     animationData,
     rendererSettings: { preserveAspectRatio: "xMidYMid slice" },
   };
+
+  const dispatch = useDispatch();
+  const [res, setRes] = useState("");
+
+  useEffect(() => {
+    if (res) {
+      localStorage.setItem("token", res.data.accessToken);
+      req
+        .getUserInfo()
+        .then((res) => res.json())
+        .then((json) => dispatch(login(json.data)));
+    }
+  }, [res]);
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
@@ -25,13 +42,12 @@ function Home() {
         <GoogleLogin
           width="356px"
           onSuccess={(credentialResponse) => {
-            const res = req.loginByGoogle({
-              token: credentialResponse.credential,
-            });
-            if (res.token) {
-              localStorage.setItem("token", res.token);
-            }
-            console.log(credentialResponse);
+            const res = req
+              .loginByGoogle({
+                token: credentialResponse.credential,
+              })
+              .then((res) => res.json())
+              .then((json) => setRes(json));
           }}
           onError={() => {
             console.log("Login Failed");

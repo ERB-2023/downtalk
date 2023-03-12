@@ -16,10 +16,7 @@ export class UserService {
     offset: number,
   ): Promise<User[]> {
     return this.userRepository.find({
-      where: [
-        { email: Like(`%${searchKey}%`) },
-        { name: Like(`%${searchKey}%`) },
-      ],
+      where: [{ email: Like(`%${searchKey}%`) }],
       take: limit,
       skip: offset,
     });

@@ -5,8 +5,9 @@ import styles from "./index.module.scss";
 interface SearchBarProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onSearchClick?: React.MouseEventHandler<HTMLImageElement>;
 }
-function SearchBar({ value, onChange }: SearchBarProps) {
+function SearchBar({ value, onChange, onSearchClick }: SearchBarProps) {
   return (
     <div className={styles.container}>
       <Input value={value} onChange={onChange} />
@@ -16,6 +17,7 @@ function SearchBar({ value, onChange }: SearchBarProps) {
         width={20}
         height={20}
         alt="search"
+        onClick={onSearchClick}
       />
     </div>
   );

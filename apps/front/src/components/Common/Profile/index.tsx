@@ -4,8 +4,8 @@ import styles from "./index.module.scss";
 interface ProfileProps {
   deletable: boolean;
   editable: boolean;
-  size?: "small" | "big";
-  profile?: string; // 추후에 옵셔널 빼야함
+  size?: "small" | "big" | "extra";
+  profile?: string | null; // 추후에 옵셔널 빼야함
   className?: string | undefined;
 }
 function Profile({
@@ -15,20 +15,30 @@ function Profile({
   profile,
   className,
 }: ProfileProps) {
+  const imageSize = {
+    small: 43,
+    big: 72,
+    extra: 100,
+  };
+  const iconSize = {
+    small: 20,
+    big: 24,
+    extra: 24,
+  };
   return (
     <div className={`${styles.container} ${className}`}>
       <Image
         src={profile || "/images/default-profile.png"}
-        width={size === "small" ? 43 : 72}
-        height={size === "small" ? 43 : 72}
+        width={imageSize[size]}
+        height={imageSize[size]}
         alt="profile"
       />
       {deletable && (
         <Image
           className={styles.icon}
           src="/images/icon-delete.svg"
-          width={size === "small" ? 20 : 24}
-          height={size === "small" ? 20 : 24}
+          width={iconSize[size]}
+          height={iconSize[size]}
           alt="delete"
         />
       )}
@@ -36,8 +46,8 @@ function Profile({
         <Image
           className={styles.icon}
           src="/images/icon-edit.svg"
-          width={size === "small" ? 20 : 24}
-          height={size === "small" ? 20 : 24}
+          width={iconSize[size]}
+          height={iconSize[size]}
           alt="delete"
         />
       )}

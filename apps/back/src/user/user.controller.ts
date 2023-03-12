@@ -6,15 +6,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async searchUsers(
-    @Query('searchKey') searchKey: string,
-    @Query('limit') limit: string = '10',
-    @Query('offset') offset: string = '0',
-  ) {
-    const parsedLimit = parseInt(limit, 10);
-    const parsedOffset = parseInt(offset, 10);
-
-    return this.userService.searchUsers(searchKey, parsedLimit, parsedOffset);
+  async searchUsers(@Query('searchKey') searchKey: string) {
+    return this.userService.searchUsers(searchKey);
   }
 
   @Get('/:userId/profile')

@@ -11,7 +11,7 @@ const fetchRequest = (
   };
 
   if (localStorage.getItem("token")) {
-    headers["Authorization"] = localStorage.getItem("token");
+    headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
 
   if (params) {
@@ -30,5 +30,10 @@ const fetchRequest = (
 
 export const loginByGoogle = (params: any) => {
   const res = fetchRequest(URL + "/auth", "POST", params);
+  return res;
+};
+
+export const getUserInfo = (params: any) => {
+  const res = fetchRequest(URL + "/users/profile", "GET", params);
   return res;
 };

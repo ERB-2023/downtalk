@@ -3,6 +3,7 @@ import Button from "components/Common/Button";
 import Input from "components/Common/Input";
 import MemberIcon from "components/Common/MemberIcon";
 import Profile from "components/Common/Profile";
+import SectionHeader from "components/SectionHeader";
 import { useRouter } from "next/router";
 import styles from "./index.module.scss";
 
@@ -11,11 +12,7 @@ function Create() {
   const [chatName, setChatName] = useState<string>("");
   return (
     <div className={styles.container}>
-      <div>
-        <button onClick={() => router.back()}>{`<`}</button>
-        채팅방 만들기
-      </div>
-      {/* 대충 만든 임시 헤더 교체 필요 */}
+      <SectionHeader title="채팅방 만들기" onClickLeft={() => router.back()} />
       <div className={styles.wrapper}>
         <Profile
           size="big"
